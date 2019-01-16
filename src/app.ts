@@ -1,5 +1,5 @@
 import { MongoDriverFactory } from "./MongoConnectorFactory";
-import { disconnect } from "cluster";
+//import { disconnect } from "cluster";
 import { MongoDriver } from "./MongoConnector";
 import * as bodyParser from "body-parser"; 
 import * as express from "express"; 
@@ -30,9 +30,19 @@ MongoDriverFactory.build()
         name 
       });
       res.json ({id});
-    })
-    app.listen(port, () => console.log(`Example app listening on port ${port}!`)) 
+    });
+
+    app.delete('/tasks/:id', async (req, res) => {
+      const id = req.params.id; 
+      await datastore.deleteTask(id);
+      return res.sendStatus(200); 
+    });
+
+
+    app.listen(port, () => console.log(`Example app listening on port ${port}!`));
   })
+
+  
   .catch(e => {
     throw e;
   });
