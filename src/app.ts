@@ -30,7 +30,14 @@ MongoDriverFactory.build()
         name 
       });
       res.json ({id});
-    })
+    });
+
+    //return a specific task 
+    app.get('/tasks/:id', async (req, res) => {
+      const id = req.params.id;
+      const task = await datastore.readTask(id); 
+      return res.json(task); 
+    }); 
     app.listen(port, () => console.log(`Example app listening on port ${port}!`)) 
   })
   .catch(e => {
