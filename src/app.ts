@@ -38,6 +38,12 @@ MongoDriverFactory.build()
       const task = await datastore.readTask(id); 
       return res.json(task); 
     }); 
+    //create a new category 
+    app.post('/categories', async (req, res) => {
+      const name = req.body.id; 
+      const id = await datastore.createCategory(name); 
+      res.json({id}); 
+    });
     app.listen(port, () => console.log(`Example app listening on port ${port}!`)) 
   })
   .catch(e => {
