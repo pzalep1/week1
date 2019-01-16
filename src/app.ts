@@ -44,6 +44,11 @@ MongoDriverFactory.build()
       const id = await datastore.createCategory(name); 
       res.json({id}); 
     });
+    //returns all categories 
+    app.get('/categories', async(req, res) => {
+      const categories = await datastore.listCategories(); 
+      return res.json({categories}); 
+    }); 
     app.listen(port, () => console.log(`Example app listening on port ${port}!`)) 
   })
   .catch(e => {
