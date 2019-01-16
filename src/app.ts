@@ -30,7 +30,14 @@ MongoDriverFactory.build()
         name 
       });
       res.json ({id});
-    })
+    });
+
+      //delete a specific task 
+      app.delete('/tasks/:id', async (req, res) => {
+        const id = req.params.id; 
+        await datastore.deleteTask(id);
+        return res.sendStatus(200); 
+      });  
     app.listen(port, () => console.log(`Example app listening on port ${port}!`)) 
   })
   .catch(e => {
