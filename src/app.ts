@@ -9,10 +9,6 @@ const port = 3000
 
 MongoDriverFactory.build()
   .then(async (datastore) => {
-    /*console.log("Is the datastore a mongodriver?", datastore instanceof MongoDriver); 
-    await datastore.createTask({
-      name: "Homeworkx2"
-    });*/
     app.use(
       bodyParser.urlencoded({
         extended: true,
