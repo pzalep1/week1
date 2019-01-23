@@ -19,7 +19,7 @@ MongoDriverFactory.build()
     app.get('/', (req, res) => res.send('Hello World!'))
 
     
-
+    //create a new task 
     app.post('/tasks', async (req, res) => {
       const name = req.body.name;
       const id = await datastore.createTask({
@@ -34,6 +34,15 @@ MongoDriverFactory.build()
       const task = await datastore.readTask(id); 
       return res.json(task); 
     }); 
+
+    //update a specific task 
+    app.put('/tasks/:id', async (req, res) => {
+      const id = req.params.id; 
+      const task = req.body.task; 
+      await datastore.updateTask(task); 
+      return res.sendStatus(200); 
+    });  
+
     //create a new category 
     app.post('/categories', async (req, res) => {
       const name = req.body.id; 
