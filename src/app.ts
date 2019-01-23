@@ -41,7 +41,14 @@ MongoDriverFactory.build()
       const task = req.body.task; 
       await datastore.updateTask(task); 
       return res.sendStatus(200); 
-    });  
+    }); 
+    
+     //delete a specific task 
+     app.delete('/tasks/:id', async (req, res) => {
+      const id = req.params.id;
+      await datastore.deleteTask(id); 
+      return res.sendStatus(200); 
+    }); 
 
     //create a new category 
     app.post('/categories', async (req, res) => {
